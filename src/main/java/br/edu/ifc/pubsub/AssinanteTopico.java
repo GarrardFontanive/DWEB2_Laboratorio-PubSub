@@ -1,27 +1,44 @@
+
 package br.edu.ifc.pubsub;
 
-import jakarta.jms.JMSContext;
-import jakarta.jms.JMSConsumer;
-import jakarta.jms.JMSRuntimeException;
-import jakarta.jms.Topic;
+import jakarta.jms.*;
 import org.apache.qpid.jms.JmsConnectionFactory;
+import java.time.LocalTime;
 
-/** Recebe mensagens do tópico enquanto o processo estiver ativo. */
 public class AssinanteTopico {
+
     public static void main(String[] args) {
+
         String servidor = "amqp://localhost:61616";
 
-        try (JMSContext contexto = new JmsConnectionFactory(servidor)
-                .createContext("admin", "admin")) {
-            Topic topico = contexto.createTopic("topico.eventos");
+        JmsConnectionFactory fabrica =
+                new JmsConnectionFactory(servidor);
+
+        try (JMSContext contexto =
+                     fabrica.createContext("admin", "admin")) {
+
+            Topic topico = contexto.createTopic("topico.eventos.teste2");
+
             JMSConsumer consumidor = contexto.createConsumer(topico);
-            System.out.println("Aguardando eventos em " + topico);
-            while (true) {
+
+            long pid = ProcessHandle.current().pid();
+
+            System.out.println("Assinante PID: " + pid);
+            System.out.println("Aguardando mensagens do topico...");
+
+            for (int i = 1; i <= 5; i++) {
+
                 String mensagem = consumidor.receiveBody(String.class);
-                if (mensagem != null) {
-                    System.out.println("Evento recebido: " + mensagem);
-                }
+
+                System.out.println(
+                        "PID: " + pid +
+                                " | Recebida: " + mensagem +
+                                " | Horario: " + LocalTime.now()
+                );
             }
+
+            System.out.println("Assinante " + pid + " finalizado!");
+
         } catch (JMSRuntimeException e) {
             System.err.println("Erro: " + e.getMessage());
         }
