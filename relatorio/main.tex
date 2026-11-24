@@ -1,0 +1,397 @@
+
+\documentclass[12pt,a4paper]{article}
+
+% ======================================
+% PACOTES
+% ======================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+% ======================================
+% FORMATAÇÃO
+% ======================================
+\geometry{
+    left=3cm,
+    right=2cm,
+    top=3cm,
+    bottom=2cm
+}
+
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ======================================
+% CAPA
+% ======================================
+\begin{titlepage}
+    \begin{center}
+
+        \textbf{INSTITUTO FEDERAL CATARINENSE}\\
+        \textbf{CAMPUS RIO DO SUL}
+
+        \vspace{2cm}
+
+        \textbf{BACHARELADO EM CIÊNCIA DA COMPUTAÇÃO}
+
+        \vspace{3cm}
+
+        {\Large\bfseries
+        LABORATÓRIO DE COMUNICAÇÃO\\
+        PUBLISH/SUBSCRIBE COM AMQP\\
+        E ACTIVEMQ ARTEMIS
+        }
+
+        \vspace{3cm}
+
+        \textbf{Acadêmico:} Nome do acadêmico\\
+        \textbf{Professor:} Nome do professor\\
+        \textbf{Disciplina:} Desenvolvimento Web
+
+        \vfill
+
+        Rio do Sul -- SC\\
+        2026
+
+    \end{center}
+\end{titlepage}
+
+% ======================================
+% RESUMO
+% ======================================
+\section*{Resumo}
+\addcontentsline{toc}{section}{Resumo}
+
+Este relatório apresenta a implementação e a análise
+de experimentos de comunicação distribuída utilizando
+o protocolo AMQP 1.0, o broker Apache ActiveMQ Artemis
+e aplicações desenvolvidas em Java.
+
+Foram realizados experimentos envolvendo a distribuição
+de mensagens em filas, a comunicação Publish/Subscribe
+com múltiplos assinantes e o armazenamento persistente
+de mensagens.
+
+Os resultados permitem observar diferentes estratégias
+de distribuição e entrega de mensagens em sistemas
+distribuídos.
+
+\textbf{Palavras-chave:} AMQP; ActiveMQ Artemis;
+Publish/Subscribe; Java; Sistemas Distribuídos.
+
+\newpage
+
+\tableofcontents
+\newpage
+
+% ======================================
+% 1 INTRODUÇÃO
+% ======================================
+\section{Introdução}
+
+A comunicação entre aplicações distribuídas
+pode ser realizada por meio de sistemas de
+mensageria, nos quais produtores e consumidores
+trocam mensagens utilizando um intermediário
+denominado \textit{broker}.
+
+Neste laboratório, foi utilizado o Apache
+ActiveMQ Artemis para implementar experimentos
+de comunicação utilizando o protocolo AMQP 1.0.
+
+O objetivo foi investigar o comportamento
+de filas, tópicos e mensagens persistentes
+por meio de aplicações Java executadas
+simultaneamente.
+
+\subsection{Objetivos}
+
+O objetivo geral consiste em implementar e
+avaliar diferentes mecanismos de comunicação
+por mensagens utilizando AMQP e ActiveMQ.
+
+Os objetivos específicos são:
+
+\begin{itemize}
+    \item Configurar um broker ActiveMQ em Docker;
+    \item Implementar produtores e consumidores em Java;
+    \item Avaliar a distribuição de mensagens em filas;
+    \item Demonstrar a comunicação fan-out;
+    \item Verificar a persistência após reinício do broker.
+\end{itemize}
+
+% ======================================
+% 2 REFERENCIAL TEÓRICO
+% ======================================
+\section{Referencial Teórico}
+
+\subsection{Sistemas de Mensageria}
+
+% Desenvolver com base nos artigos indicados.
+
+\subsection{Arquitetura Publish/Subscribe}
+
+% Explicar produtores, broker e assinantes.
+
+\subsection{Protocolo AMQP}
+
+% Explicar AMQP 1.0.
+
+\subsection{Apache ActiveMQ Artemis}
+
+% Explicar o funcionamento do broker.
+
+\subsection{Filas, Tópicos e Persistência}
+
+% Explicar ANYCAST, MULTICAST e persistência.
+
+% ======================================
+% 3 METODOLOGIA
+% ======================================
+\section{Metodologia}
+
+\subsection{Ambiente Experimental}
+
+Os experimentos foram realizados em um ambiente
+Linux, utilizando as seguintes tecnologias:
+
+\begin{itemize}
+    \item Sistema operacional: Arch Linux;
+    \item Linguagem de programação: Java;
+    \item Gerenciador de dependências: Apache Maven;
+    \item Broker: Apache ActiveMQ Artemis;
+    \item Protocolo: AMQP 1.0;
+    \item Biblioteca: Apache Qpid JMS;
+    \item Contêineres: Docker;
+    \item IDE: IntelliJ IDEA.
+\end{itemize}
+
+O broker foi executado em um contêiner Docker,
+disponibilizando o serviço de mensageria
+na porta 61616.
+
+As aplicações Java estabeleceram conexões
+com o broker por meio da biblioteca Qpid JMS.
+
+\subsection{Organização dos Experimentos}
+
+O laboratório foi dividido em três experimentos:
+distribuição de mensagens em fila, comunicação
+fan-out por tópicos e persistência de mensagens.
+
+% ======================================
+% 4 EXPERIMENTO I
+% ======================================
+\section{Experimento I: Filas e Distribuição de Mensagens}
+
+\subsection{Implementação}
+
+Foi implementado um produtor Java responsável
+por enviar cinco mensagens para uma fila
+gerenciada pelo ActiveMQ Artemis.
+
+As mensagens foram publicadas com intervalos
+de 60 segundos.
+
+Também foram implementados consumidores
+responsáveis por receber individualmente
+as mensagens disponibilizadas pelo broker.
+
+\subsection{Resultados}
+
+Na comunicação baseada em filas com roteamento
+ANYCAST, uma mensagem é direcionada a um dos
+consumidores associados à fila.
+
+O experimento demonstrou a recepção de mensagens
+por diferentes processos Java, identificados
+por seus respectivos PIDs.
+
+% Inserir prints dos consumidores e da fila.
+
+\subsection{Discussão}
+
+O mecanismo de filas permite distribuir
+mensagens entre consumidores, diferentemente
+do modelo fan-out, no qual uma publicação
+pode alcançar múltiplos assinantes.
+
+% ======================================
+% 5 EXPERIMENTO II
+% ======================================
+\section{Experimento II: Fan-out com Tópicos}
+
+\subsection{Implementação}
+
+Foi utilizado um tópico para implementar
+a comunicação Publish/Subscribe.
+
+Cinco processos assinantes foram conectados
+simultaneamente ao broker.
+
+Em seguida, um produtor publicou cinco
+mensagens, utilizando intervalos de
+60 segundos entre as publicações.
+
+\subsection{Resultados}
+
+Todos os cinco assinantes receberam as
+cinco mensagens publicadas, na ordem
+correspondente aos eventos numerados
+de 1 até 5.
+
+O experimento apresentou um total de
+25 recebimentos.
+
+\begin{table}[H]
+\centering
+\caption{Resultados do experimento fan-out}
+\begin{tabular}{lc}
+\toprule
+\textbf{Indicador} & \textbf{Resultado} \\
+\midrule
+Mensagens publicadas & 5 \\
+Assinantes simultâneos & 5 \\
+Intervalo entre publicações & 60 s \\
+Mensagens por assinante & 5 \\
+Total de recebimentos & 25 \\
+\bottomrule
+\end{tabular}
+\label{tab:fanout}
+\end{table}
+
+\subsection{Discussão}
+
+Os resultados demonstram o comportamento
+MULTICAST da comunicação Publish/Subscribe,
+em que cada assinante ativo recebe uma
+cópia das mensagens publicadas no tópico.
+
+% Inserir evidências e aprofundar a análise.
+
+% ======================================
+% 6 EXPERIMENTO III
+% ======================================
+\section{Experimento III: Persistência de Mensagens}
+
+\subsection{Implementação}
+
+Foi implementado um produtor utilizando
+o modo de entrega \texttt{PERSISTENT}
+da API Jakarta Messaging.
+
+A mensagem foi enviada para a fila
+\texttt{fila.persistente}.
+
+Após o envio, o contêiner responsável
+pelo ActiveMQ Artemis foi reiniciado.
+
+\subsection{Resultados}
+
+A mensagem permaneceu armazenada na fila
+após o reinício do broker, demonstrando
+a preservação da mensagem persistente
+nesse cenário experimental.
+
+% Inserir print antes e depois do reinício.
+% Documentar o consumo posterior da mensagem.
+
+\subsection{Discussão}
+
+A persistência permite que mensagens
+não consumidas sejam preservadas pelo broker
+durante determinadas situações de reinício
+ou interrupção do serviço.
+
+Esse mecanismo é relevante para aplicações
+que exigem maior confiabilidade na
+entrega de mensagens.
+
+% ======================================
+% 7 ANÁLISE COMPARATIVA
+% ======================================
+\section{Análise Comparativa}
+
+\begin{table}[H]
+\centering
+\caption{Comparação dos mecanismos experimentados}
+\begin{tabular}{lll}
+\toprule
+\textbf{Mecanismo} &
+\textbf{Destino} &
+\textbf{Comportamento} \\
+\midrule
+ANYCAST & Fila & Distribuição \\
+MULTICAST & Tópico & Fan-out \\
+PERSISTENT & Fila & Armazenamento \\
+\bottomrule
+\end{tabular}
+\label{tab:comparacao}
+\end{table}
+
+Os mecanismos avaliados apresentam
+características distintas de distribuição
+e armazenamento de mensagens.
+
+Enquanto as filas permitem compartilhar
+a carga de processamento entre consumidores,
+os tópicos possibilitam distribuir uma
+mesma publicação a múltiplos assinantes.
+
+Já a persistência está relacionada
+à preservação das mensagens armazenadas,
+não sendo uma alternativa aos mecanismos
+de roteamento.
+
+% ======================================
+% 8 CONCLUSÃO
+% ======================================
+\section{Conclusão}
+
+Os experimentos permitiram observar
+diferentes comportamentos da comunicação
+por mensagens utilizando AMQP 1.0
+e Apache ActiveMQ Artemis.
+
+O experimento com filas demonstrou a
+distribuição de mensagens entre consumidores.
+
+No experimento fan-out, cinco assinantes
+receberam cinco publicações cada,
+totalizando 25 recebimentos.
+
+O teste de persistência demonstrou que
+a mensagem armazenada permaneceu disponível
+após o reinício do broker.
+
+Os resultados evidenciam a importância
+da escolha do mecanismo de comunicação
+conforme os requisitos das aplicações
+distribuídas.
+
+% ======================================
+% REFERÊNCIAS
+% ======================================
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{referencias}
+
+\end{document}
