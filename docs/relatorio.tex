@@ -1,0 +1,34 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{listings}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Laboratório de Mensageria Pub/Sub com AMQP}
+\author{BCC}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Objetivo}
+Este laboratório demonstra comunicação assíncrona com Apache Qpid JMS e um broker AMQP local.
+Foram implementados produtores e consumidores para filas, publicação/assinatura em tópicos e entrega persistente.
+
+\section{Experimentos}
+\begin{enumerate}
+  \item \textbf{Fila}: mensagens são enviadas por \texttt{Produtor} e recebidas por \texttt{Consumidor}.
+  \item \textbf{Fan-out}: \texttt{PublicadorTopico} publica uma mensagem e cada \texttt{AssinanteTopico} ativo recebe uma cópia.
+  \item \textbf{Persistência}: \texttt{ProdutorPersistente} usa \texttt{DeliveryMode.PERSISTENT}; a mensagem pode ser consumida após a reconexão.
+\end{enumerate}
+
+\section{Resultados}
+Os registros em \texttt{docs/prints/} mostram mensagens enviadas, recebidas e publicadas.
+Em uma execução com o broker em \texttt{localhost:61616}, os três cenários foram representados pelos respectivos programas Java.
+
+\section{Execução}
+Após iniciar o broker, execute \texttt{mvn compile} e rode as classes com a IDE ou com o classpath gerado pelo Maven.
+
+\end{document}

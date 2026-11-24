@@ -1,0 +1,6 @@
+$ java br.edu.ifc.pubsub.AssinanteTopico
+Aguardando eventos em topic://topico.eventos
+Evento recebido: Evento publicado no tópico
+
+$ java br.edu.ifc.pubsub.PublicadorTopico
+Mensagem publicada: Evento publicado no tópico

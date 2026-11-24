@@ -1,0 +1,8 @@
+$ java br.edu.ifc.pubsub.Produtor
+Mensagem enviada Mensagem numero 1
+Mensagem enviada Mensagem numero 2
+...
+
+$ java br.edu.ifc.pubsub.Consumidor
+Aguardando mensagem...
+Mensagem recebida: Mensagem numero 1

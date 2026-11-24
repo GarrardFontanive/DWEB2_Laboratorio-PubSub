@@ -1,0 +1,5 @@
+$ java br.edu.ifc.pubsub.ProdutorPersistente
+Mensagem persistente enviada para fila.persistente
+
+$ java br.edu.ifc.pubsub.ConsumidorPersistente
+Mensagem persistente recebida: Mensagem persistente de experimento
